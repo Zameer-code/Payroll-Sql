@@ -36,22 +36,22 @@ describe employee_payroll;			    							 #Describe or viewing if the table..
 update employee_payroll set gender = 'M' where employee_name = 'Jackson Briggs' or employee_name = 'Liu Kang' or employee_name = 'Johny Cage'; ##Setting of the Gender..
 update employee_payroll set salary = 30000.00 where employee_name = 'Liu Kang';																## Updating the salary according to the group of the Gender..
 
-
 select avg(salary) from employee_payroll where gender = 'M' group by gender;
 select count(employee_name) from employee_payroll group by gender;
 select avg(salary) from employee_payroll group by gender;
 select count(employee_name) from employee_payroll group by gender;
 select sum(salary) from employee_payroll group by gender;
 
-
- alter table employee_payroll add address varchar(250) after phone_number;
- alter table employee_payroll add department varchar(250) NOT NULL after address;
- alter table employee_payroll alter address set default 'TBD';
+##UC-8 Altering to add basic-pay,deductions,taxable_pay,tax and Net-pay...
+ alter table employee_payroll rename column salary to basic_pay;                     ##renames salary column to basic_pay
+ alter table employee_payroll add address varchar(250) after phone_number;          ##adds address column to the table 
+ alter table employee_payroll add department varchar(250) NOT NULL after address;   ##adds department column to the table
+ alter table employee_payroll alter address set default 'TBD';             
  describe employee_payroll;
+ 
  insert into employee_payroll ( name, salary, start ) values ( 'Jackson', 100000, '2018-01-03' );
  
- 
-
+ ##UC-9 adding and Calculating of Deductions...
  alter table employee_payroll add deductions double not null after basic_pay;
  alter table employee_payroll add taxable_pay double not null after deductions;
  alter table employee_payroll add tax double not null after taxable_pay;
