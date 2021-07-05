@@ -42,3 +42,19 @@ select count(employee_name) from employee_payroll group by gender;
 select avg(salary) from employee_payroll group by gender;
 select count(employee_name) from employee_payroll group by gender;
 select sum(salary) from employee_payroll group by gender;
+
+
+ alter table employee_payroll add address varchar(250) after phone_number;
+ alter table employee_payroll add department varchar(250) NOT NULL after address;
+ alter table employee_payroll alter address set default 'TBD';
+ describe employee_payroll;
+ insert into employee_payroll ( name, salary, start ) values ( 'Jackson', 100000, '2018-01-03' );
+ 
+ 
+
+ alter table employee_payroll add deductions double not null after basic_pay;
+ alter table employee_payroll add taxable_pay double not null after deductions;
+ alter table employee_payroll add tax double not null after taxable_pay;
+  alter table employee_payroll add net_pay double not null after tax;
+  
+  
